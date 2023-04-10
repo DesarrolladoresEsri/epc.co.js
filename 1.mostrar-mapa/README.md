@@ -52,4 +52,16 @@ En la etiqueta `head`, agregue referencias al archivo CSS y la librería JS.
 <!-- FIN DEL BLOQUE DE CÓDIGO AGREGADO -->
 ```
 ## Agregue módulos
-El 
+El _ArcGIS Maps SDK for JavaScript_ está disponible como [módulos AMD](https://dojotoolkit.org/documentation/tutorials/1.10/modules/index.html) y [módulos ES](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), pero este ejercicio está basado en módulos AMD. La función AMD `require` usa referencias para determinar cuales módulos serán cargados -por ejemplo, puede especificar `esri/Map` para cargar el módulo [Map](https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html). Después de que los módulos se han cargado, son pasados como parámetros, (ej. `Map`) a la funcióon callback donde pueden ser usados en su aplicación. Es importante mantener las referencias del módulo y los parámetros del callback en el mismo orden. Para aprender más acerca de los diferentes tipos de módulos, visite la guía [Introduction to Tooling](https://developers.arcgis.com/javascript/latest/tooling-intro/).
+1. En la etiqueta `<head>`, agregue una etiqueta `<script>`y una declaración `require`para cargar los módulos [`Map`](https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html) y [`MapView`]. Tambien puede agregar el código JavaScript al panel **CodePen** > **JS** en lugar del panel **HTML**. Si hace esto, remueva la etiqueta `<script>`. 
+```html
+<link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.26/"></script>
+<!-- BLOQUE DE CÓDIGO AGREGADO -->
+<script>
+    require(["esri/config", "esri/Map", "esri/views/MapView"], function(esriConfig, Map, MapView) {
+
+    });
+</script>
+<!-- FIN DEL BLOQUE DE CÓDIGO AGREGADO -->
+```
