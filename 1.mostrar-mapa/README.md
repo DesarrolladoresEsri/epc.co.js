@@ -8,7 +8,7 @@ Para este ejercicio necesita una cuenta gratuita de [desarrollador de ArcGIS](ht
 Defina una página HTML para crear un mapa que sea del ancho y alto total de la ventana del navegador. 
 1. En **CodePen** > **HTML**, agregue código HTML y CSS para crear una página con un elemento `viewDiv`. El `viewDiv` es el elemento que muestra el mapa y su CSS reajusta las configuraciones de cualquir navegador web de manera que este pueda consumir el ancho y alto completo de la ventana.
 La etiqueta `<!DOCTYPE html>` no es necesaria en CodePen. Si está usando un editor diferente o ejecutando la página en un servidor local, asegúrese de añadir esta etiqueta al inicio de su página HTML.
-```
+```html
 <html>
   <head>
     <meta charset="utf-8" />
