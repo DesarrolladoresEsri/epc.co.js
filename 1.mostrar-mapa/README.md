@@ -6,29 +6,48 @@ Para este ejercicio necesita una cuenta gratuita de [desarrollador de ArcGIS](ht
 1. Ingrese a [CodePen](https://codepen.io/pen/?editors=1000) para crear un nuevo pen para su aplicación de mapa. 
 ## Agregue el código HTML
 Defina una página HTML para crear un mapa que sea del ancho y alto total de la ventana del navegador. 
-1. En **CodePen** > **HTML**, agregue código HTML y CSS para crear una página con un elemento `viewDiv`. El `viewDiv` es el elemento que muestra el mapa y su CSS reajusta las configuraciones de cualquir navegador web de manera que este pueda consumir el ancho y alto completo de la ventana.
+1. En **CodePen** > **HTML**, agregue código HTML y CSS para crear una página con un elemento `viewDiv`. El `viewDiv` es el elemento que muestra el mapa y su CSS reajusta las configuraciones de cualquier navegador web de manera que este pueda consumir el ancho y alto completo de la ventana.
 La etiqueta `<!DOCTYPE html>` no es necesaria en CodePen. Si está usando un editor diferente o ejecutando la página en un servidor local, asegúrese de añadir esta etiqueta al inicio de su página HTML.
 ```html
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>ArcGIS Maps SDK for JavaScript Tutorials: Display a map</title>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <title>ArcGIS Maps SDK for JavaScript Tutorials: Display a map</title>
 
-    <style>
-      html,
-      body,
-      #viewDiv {
-        padding: 0;
-        margin: 0;
-        height: 100%;
-        width: 100%;
-      }
-    </style>
+        <style>
+            html,
+            body,
+            #viewDiv {
+                padding: 0;
+                margin: 0;
+                height: 100%;
+                width: 100%;
+            }
+        </style>
 
-  </head>
-  <body>
-    <div id="viewDiv"></div>
-  </body>
+    </head>
+    <body>
+        <div id="viewDiv"></div>
+    </body>
 </html>
+```
+## Referencie la API
+En la etiqueta `head`, agregue referencias al archivo CSS y la librería JS.
+```html
+<style>
+            html,
+            body,
+            #viewDiv {
+                padding: 0;
+                margin: 0;
+                height: 100%;
+                width: 100%;
+            }
+        </style>
+        <!-- BLOQUE DE CÓDIGO AGREGADO -->
+        <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css">
+        <script src="https://js.arcgis.com/4.26/"></script>
+        <!-- FIN DEL BLOQUE DE CÓDIGO AGREGADO -->
 ```
