@@ -15,6 +15,11 @@ La etiqueta `<!DOCTYPE html>` no es necesaria en CodePen. Si está usando un edi
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
         <title>ArcGIS Maps SDK for JavaScript Tutorials: Display a map</title>
+        <script>
+            esriConfig = {
+                locale: "es"
+            };
+        </script>
 
         <style>
             html,
@@ -59,7 +64,15 @@ El _ArcGIS Maps SDK for JavaScript_ está disponible como [módulos AMD](https:/
 <script src="https://js.arcgis.com/4.26/"></script>
 <!-- BLOQUE DE CÓDIGO AGREGADO -->
 <script>
-    require(["esri/config", "esri/Map", "esri/views/MapView"], function(esriConfig, Map, MapView) {
+    require([
+        "esri/config", 
+        "esri/Map", 
+        "esri/views/MapView"
+    ], function(
+        esriConfig, 
+        Map, 
+        MapView
+    ) {
 
     });
 </script>
@@ -76,7 +89,15 @@ Use un [`Map`](https://developers.arcgis.com/javascript/latest/api-reference/esr
 >Aprenda más sobre cómo un mapa y una vista de mapa funcionan en la guía [Mapping and location services](https://developers.arcgis.com/documentation/mapping-apis-and-services/).
 ```html
 <script>
-    require(["esri/config", "esri/Map", "esri/views/MapView"], function(esriConfig, Map, MapView) {
+    require([
+        "esri/config", 
+        "esri/Map", 
+        "esri/views/MapView"
+    ], function(
+        esriConfig, 
+        Map, 
+        MapView
+    ) {
         /* BLOQUE DE CÓDIGO AGREGADO */
         esriConfig.apiKey = "SU_API_KEY";
 
@@ -95,7 +116,15 @@ La [`MapView`](https://developers.arcgis.com/javascript/latest/api-reference/esr
 >Aprenda más sobre cómo un mapa y una vista de mapa funcionan en la guía [Mapping and location services](https://developers.arcgis.com/documentation/mapping-apis-and-services/).
 ```html
 <script>
-    require(["esri/config", "esri/Map", "esri/views/MapView"], function(esriConfig, Map, MapView) {
+    require([
+        "esri/config", 
+        "esri/Map", 
+        "esri/views/MapView"
+    ], function(
+        esriConfig, 
+        Map, 
+        MapView
+    ) {
         esriConfig.apiKey = "SU_API_KEY";
 
         const map = new Map({
