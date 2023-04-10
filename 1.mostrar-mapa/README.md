@@ -37,17 +37,19 @@ La etiqueta `<!DOCTYPE html>` no es necesaria en CodePen. Si está usando un edi
 En la etiqueta `head`, agregue referencias al archivo CSS y la librería JS.
 ```html
 <style>
-            html,
-            body,
-            #viewDiv {
-                padding: 0;
-                margin: 0;
-                height: 100%;
-                width: 100%;
-            }
-        </style>
-        <!-- BLOQUE DE CÓDIGO AGREGADO -->
-        <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css">
-        <script src="https://js.arcgis.com/4.26/"></script>
-        <!-- FIN DEL BLOQUE DE CÓDIGO AGREGADO -->
+    html,
+    body,
+    #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+    }
+</style>
+<!-- BLOQUE DE CÓDIGO AGREGADO -->
+<link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.26/"></script>
+<!-- FIN DEL BLOQUE DE CÓDIGO AGREGADO -->
 ```
+## Agregue módulos
+El 
