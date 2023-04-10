@@ -4,6 +4,11 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
         <title>ArcGIS Maps SDK for JavaScript: Mostrar Mapa</title>
+        <script>
+            esriConfig = {
+                locale: "es"
+            };
+        </script>
 
         <style>
             html,
@@ -20,20 +25,27 @@
         <script src="https://js.arcgis.com/4.26/"></script>
         
         <script>
-            require(["esri/config", "esri/Map", "esri/views/MapView"], function(esriConfig, Map, MapView) {
+            require([
+                "esri/config", 
+                "esri/Map", 
+                "esri/views/MapView"
+            ], function(
+                esriConfig, 
+                Map, 
+                MapView
+            ) {
                 // esriConfig.apiKey = "SU_API_KEY";
 
                 const map = new Map({
                     basemap: "arcgis-topographic"
                 });
-                /* BLOQUE DE CÓDIGO AGREGADO */
+                
                 const view = new MapView({
                     map: map,
                     center: [-74.05142721441229, 4.673855997314436],
                     zoom: 13, 
                     container: "viewDiv"
                 });
-                /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
             });
         </script>
 
