@@ -117,4 +117,4 @@ En **CondePen**, ejecute su aplicación.
 El mapa debe mostrar la capa de mapa base topográfico para un área de Bogotá, Colombia.
 - [Ver ejemplo en vivo](https://desarrolladoresesri.github.io/epc.co.js/1.mostrar-mapa/mapa.html)
 - [Ver el código](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/1.mostrar-mapa/mapa.html)
-- [Ir al ejercicio siguiente: Cambiar el mapa base](#)
+- [Ir al ejercicio siguiente: Cambiar el mapa base](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/2.mapa-base/README.md)
