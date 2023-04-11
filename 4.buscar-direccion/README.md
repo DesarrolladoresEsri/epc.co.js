@@ -1,4 +1,38 @@
-# Encontrar una dirección
+# Buscar una dirección
 La geocodificación es el proceso de convertir el texto de direcciones o _lugares_ en una _ubicación_. El _Servicio de geocodificación_ puede buscar una dirección o un lugar y realizar _geocodificación inversa_. Use el widget [Search](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html) para acceder al servicio de geocodificación y realizar búsquedas interactivas.  
 En este ejercicio, aprenderá a usar el widget [Search](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html) para encontrar direcciones y sitios de interés. 
 > Para aprender más acerca de geocodificación y encontrar sitios de interés, visite [Geocode and search](https://developers.arcgis.com/documentation/mapping-apis-and-services/search/) en la guía [Mapping API and location services](https://developers.arcgis.com/documentation/mapping-apis-and-services/)
+##  Cree un nuevo pen
+1. Para iniciar, use el código del [ejercicio anterior](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/3.ubicacion/README.md).
+## Agregue módulos
+1. En la declaración `require`, agregue el módulo [`Search`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html).
+```javascript
+require([
+    "esri/config", 
+    "esri/Map", 
+    "esri/views/MapView",
+
+    "esri/widgets/BasemapGallery",
+    "esri/widgets/Expand",
+
+    "esri/widgets/Locate",
+    /* BLOQUE DE CÓDIGO AGREGADO */
+    "esri/widgets/Search"
+    /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+], function(
+    esriConfig, 
+    Map, 
+    MapView,
+
+    BasemapGallery,
+    Expand,
+
+    Locate,
+    /* BLOQUE DE CÓDIGO AGREGADO */
+    Search
+    /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+) {
+```
+## Agregue el widget Search
+El _widget_ [`Search`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html) es un control visible que le permite encontrar direcciones y sitios de interés interactivamente. Este widget proporciona sugerencias a medida que teclea y le permite seleccionar un resultado. Cuando selecciona un resultado, el mapa se acerca a este y muestra una ventana emergente con la información de la dirección. Por defecto, el widget usa un [`locator`](https://developers.arcgis.com/javascript/latest/api-reference/esri-rest-locator.html) y [`source`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#sources) para acceder al _servicio de Geocodificación_.
+1. 
