@@ -1,1 +1,4 @@
 # Encontrar una dirección
+La geocodificación es el proceso de convertir el texto de direcciones o _lugares_ en una _ubicación_. El _Servicio de geocodificación_ puede buscar una dirección o un lugar y realizar _geocodificación inversa_. Use el widget [Search](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html) para acceder al servicio de geocodificación y realizar búsquedas interactivas.  
+En este ejercicio, aprenderá a usar el widget [Search](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html) para encontrar direcciones y sitios de interés. 
+> Para aprender más acerca de geocodificación y encontrar sitios de interés, visite [Geocode and search](https://developers.arcgis.com/documentation/mapping-apis-and-services/search/) en la guía [Mapping API and location services](https://developers.arcgis.com/documentation/mapping-apis-and-services/)
