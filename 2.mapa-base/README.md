@@ -78,7 +78,7 @@ view.ui.add(bgExpand, "top-right");
 
 ## Ejecute la aplicación
 En **CodePen**, ejecute su aplicación. Ahora debería ver un widget en la parte superior derecha de su aplicación que le permite elegir entre diferentes mapas base.
--[Ver ejemplo en vivo](#)
--[Ver código](#)
+-[Ver ejemplo en vivo](https://desarrolladoresesri.github.io/epc.co.js/2.mapa-base/mapa-base.html)
+-[Ver código](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/2.mapa-base/mapa-base.html)
 -[Ir al ejercicio siguiente: Mostrar ubicación](#)
 -[Ir al ejercicio anterior: Mostrar un mapa](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/1.mostrar-mapa/README.md)
