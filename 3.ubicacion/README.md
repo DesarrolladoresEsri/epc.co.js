@@ -61,5 +61,5 @@ En **CodePen**, ejecute su aplicación y haga clic en el botón de ubicación. E
 
 - [Ver ejemplo en vivo](https://desarrolladoresesri.github.io/epc.co.js/3.ubicacion/ubicacion.html)
 - [Ver código]([#](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/3.ubicacion/ubicacion.html))
-- [Ir al ejercicio siguiente: Encontrar una dirección](#)
+- [Ir al ejercicio siguiente: Buscar una dirección](#)
 - [Ir al ejercicio anterior: Cambiar el mapa base](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/2.mapa-base/README.md)
