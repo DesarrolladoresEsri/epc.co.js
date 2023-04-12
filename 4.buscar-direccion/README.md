@@ -54,7 +54,7 @@ view.ui.add(search, {
 /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
 ```
 ## Ejecute la aplicación
-En **CodePen** ejecutesu aplicación. El mapa deberá mostrar un _widget_ [`Search`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html) que le permite buscar lugares y sitios de interés de forma interactiva.  
+En **CodePen** ejecute su aplicación. El mapa deberá mostrar un _widget_ [`Search`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html) que le permite buscar lugares y sitios de interés de forma interactiva.  
 Intente buscar las siguientes ubicaciones:
 ```
 - Bucaramanga
