@@ -73,7 +73,7 @@ view.ui.add(rtExpand, "top-right");
 ```
 ## Ejecute la aplicación
 En **CodePen** ejecute su aplicación. Haga clic en el botón de direcciones en la esquina superior derecha del mapa para abrir la interfaz del widget [`Directions`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Directions.html). Puede usar las cajas de texto para seleccionar dos ubicaciones diferentes para calcular una ruta.
-- [Ver ejemplo en vivo]()
-- [Ver código]()
-- [Ir al ejercicio siguiente: Agregar Capas]()
+- [Ver ejemplo en vivo](https://desarrolladoresesri.github.io/epc.co.js/5.rutas/rutas.html)
+- [Ver código](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/5.rutas/rutas.html)
+- [Ir al ejercicio siguiente: Agregar Capas](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/6.agregar-capa/README.md)
 - [Ir al ejercicio anterior: Buscar una dirección](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/4.buscar-direccion/README.md)
