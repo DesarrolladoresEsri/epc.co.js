@@ -35,4 +35,21 @@ require([
 ```
 ## Agregue el widget Search
 El _widget_ [`Search`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html) es un control visible que le permite encontrar direcciones y sitios de interés interactivamente. Este widget proporciona sugerencias a medida que teclea y le permite seleccionar un resultado. Cuando selecciona un resultado, el mapa se acerca a este y muestra una ventana emergente con la información de la dirección. Por defecto, el widget usa un [`locator`](https://developers.arcgis.com/javascript/latest/api-reference/esri-rest-locator.html) y [`source`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#sources) para acceder al _servicio de Geocodificación_.
-1. 
+1. Al final del código en la función principal `function`, cree un widget [`Search`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html). Ajuste la propiedad [`view`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#view) como `view`.
+```javascript
+const search = new Search({
+    view: view
+});
+```
+2. Agregue el _widget_ en la esquina superior izquierda de la vista. Ajuste la propiedad `index` como `0` para ubicar el widget en la primera posición. Aprenda más sobre añadir componentes de la interfaz de usuario a la vista en [DefaultUI](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-ui-DefaultUI.html).
+```javascript
+const search = new Search({
+    view: view
+});
+/* BLOQUE DE CÓDIGO AGREGADO */
+view.ui.add(search, {
+    position: "top-left",
+    index: 0
+});
+/* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+```
