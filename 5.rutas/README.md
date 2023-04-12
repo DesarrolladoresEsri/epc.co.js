@@ -40,4 +40,4 @@ require([
 ```
 ## Agregue el widget Directions
 El widget [`Directions`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Directions.html) proporciona una forma de calcular indicaciones de conducción, entre dos o más ubicaciones con una [RouteLayer](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-RouteLayer.html), usando diferentes servicios de Análisis de Redes de Rutas. Este widget genera una ruta encontrando el camino de menor costo entre varios puntos usando un servicio de calculo de rutas específico. Las indicaciones de conducción resultantes son mostradas con instrucciones detalladas giro a giro. 
-1. 
+1. Al final del código en la función principal `function`, cree una [RouteLayer](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-RouteLayer.html).
