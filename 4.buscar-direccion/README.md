@@ -53,3 +53,16 @@ view.ui.add(search, {
 });
 /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
 ```
+## Ejecute la aplicación
+En **CodePen** ejecutesu aplicación. El mapa deberá mostrar un _widget_ [`Search`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html) que le permite buscar lugares y sitios de interés de forma interactiva.  
+Intente buscar las siguientes ubicaciones:
+```
+- Bucaramanga
+- Aeropuerto El Dorado
+- Calle 90 #13-40
+- 6.816, -73.01
+```
+- [Ver ejemplo en vivo](https://desarrolladoresesri.github.io/epc.co.js/4.buscar-direccion/buscar-direccion.html)
+- [Ver código](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/4.buscar-direccion/buscar-direccion.html)
+- [Ir al ejercicio siguiente: Calcular rutas](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/5.rutas/README.md)
+- [Ir al ejercicio anterior: Mostrar ubicación](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/3.ubicacion/README.md)
