@@ -60,6 +60,6 @@ En **CodePen**, ejecute su aplicación y haga clic en el botón de ubicación. E
 > Si previamente no ha permitido a su navegador usar su ubicación, este solicitará permisos antes de acceder a la ubicación del dispositivo. Debe aprobar esta solicitud para que el widget funcione. Si está usando CodePen, es posible que el widget no funcione en la vista **Editor**. Si esto sucede, cambie a la vista **Debug** y ejecute la aplicación nuevamente. 
 
 - [Ver ejemplo en vivo](https://desarrolladoresesri.github.io/epc.co.js/3.ubicacion/ubicacion.html)
-- [Ver código]([#](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/3.ubicacion/ubicacion.html))
-- [Ir al ejercicio siguiente: Buscar una dirección](#)
+- [Ver código](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/3.ubicacion/ubicacion.html)
+- [Ir al ejercicio siguiente: Buscar una dirección](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/4.buscar-direccion/README.md)
 - [Ir al ejercicio anterior: Cambiar el mapa base](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/2.mapa-base/README.md)
