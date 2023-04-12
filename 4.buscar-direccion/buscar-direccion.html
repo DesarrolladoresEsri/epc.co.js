@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <title>ArcGIS Maps SDK for JavaScript: Buscar Dirección</title>
+
+        <script>
+            esriConfig = {
+                locale: "es"
+            };
+        </script>
+
+        <style>
+            html,
+            body,
+            #viewDiv {
+                padding: 0;
+                margin: 0;
+                height: 100%;
+                width: 100%;
+            }
+        </style>
+        
+        <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css">
+        <script src="https://js.arcgis.com/4.26/"></script>
+        
+        <script>
+            require([
+                "esri/config", 
+                "esri/Map", 
+                "esri/views/MapView",
+                
+                "esri/widgets/BasemapGallery",
+                "esri/widgets/Expand",
+
+                "esri/widgets/Locate",
+
+                "esri/widgets/Search"
+            ], function(
+                esriConfig, 
+                Map, 
+                MapView,
+                
+                BasemapGallery,
+                Expand,
+
+                Locate,
+                
+                Search
+            ) {
+                //esriConfig.apiKey = "SU_API_KEY";
+
+                const map = new Map({
+                    basemap: "arcgis-topographic"
+                });
+                
+                const view = new MapView({
+                    map: map,
+                    center: [-74.05142721441229, 4.673855997314436],
+                    zoom: 13, 
+                    container: "viewDiv"
+                });
+                
+                const basemapGallery = new BasemapGallery({
+                    view: view,
+                    source: {
+                        query: {
+                            title: '"World Basemaps for Developers" AND owner:esri'
+                        }
+                    }
+                });
+                
+                const bgExpand = new Expand({
+                    view: view,
+                    content: basemapGallery,
+                    autoCollapse: true
+                });
+                view.ui.add(bgExpand, "top-right");
+                
+                const locate = new Locate({
+                    view: view,
+                    useHeadingEnabled: false,
+                    goToOverride: function(view, options) {
+                        options.target.scale = 1500;
+                        return view.goTo(options.target);
+                    }
+                });
+                view.ui.add(locate, "top-left");
+
+                const search = new Search({
+                    view: view
+                });
+                view.ui.add(search, {
+                    position: "top-left",
+                    index: 0
+                });
+            });
+        </script>
+
+    </head>
+    <body>
+        <div id="viewDiv"></div>
+    </body>
+</html>
