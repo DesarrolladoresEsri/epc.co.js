@@ -60,3 +60,6 @@ map.add(ipsLayer);
 /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
 ```
 3. Ejecute la aplicación para ver la _capa_ Instituciones Prestadoras de Salud en el mapa.
+## Edite el estilo de la capa
+Las _capas de Entidades_ pueden ser personalizadas del lado del cliente por medio de un [renderer](https://developers.arcgis.com/javascript/latest/api-reference/esri-renderers-Renderer.html). Los renderizadores son los responsables de usar los valores de los atributos para aplicar el símbolo apropiado a cada _entidad_ cuando la capa se dibuja. Los renderizadores pueden ser usados con variables visuales y expresiones para crear visualizaciones más complejas orientadas a los datos.  
+Puede usar renderizadores para personalizar los datos de una capa de entidades por valores de atributo únicos. Use las clases [`UniqueValueRenderer`](https://developers.arcgis.com/javascript/latest/api-reference/esri-renderers-UniqueValueRenderer.html) y 
