@@ -62,4 +62,24 @@ map.add(ipsLayer);
 3. Ejecute la aplicación para ver la _capa_ Instituciones Prestadoras de Salud en el mapa.
 ## Edite el estilo de la capa
 Las _capas de Entidades_ pueden ser personalizadas del lado del cliente por medio de un [renderer](https://developers.arcgis.com/javascript/latest/api-reference/esri-renderers-Renderer.html). Los renderizadores son los responsables de usar los valores de los atributos para aplicar el símbolo apropiado a cada _entidad_ cuando la capa se dibuja. Los renderizadores pueden ser usados con variables visuales y expresiones para crear visualizaciones más complejas orientadas a los datos.  
-Puede usar renderizadores para personalizar los datos de una capa de entidades por valores de atributo únicos. Use las clases [`UniqueValueRenderer`](https://developers.arcgis.com/javascript/latest/api-reference/esri-renderers-UniqueValueRenderer.html) y 
+Puede usar renderizadores para personalizar los datos de una capa de entidades por valores de atributo únicos. Use las clases [`UniqueValueRenderer`](https://developers.arcgis.com/javascript/latest/api-reference/esri-renderers-UniqueValueRenderer.html) y [`PictureMarkerSymbol`](https://developers.arcgis.com/javascript/latest/api-reference/esri-symbols-PictureMarkerSymbol.html) para editar las entidades de punto con diferentes símbolos, basados en el atributo _SEDE_PRINC_ en la capa de entidades [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0).
+1. En la función principal `function`, justo antes de crear la capa de entidades [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0), cree una función `createPictureMarkerSymbol` con `value` y `url` como parámetros. La función retornará un símbolo de tipo `picture-marker` para cada tipo de IPS.
+```javascript
+/* BLOQUE DE CÓDIGO AGREGADO */
+function createPictureMarkerSymbol(value, url){
+    return {
+        value:value,
+        symbol: {
+            type: "picture-marker",
+            url: url,
+            width: "15px",
+            height: "15px"
+        }
+    }
+}
+/* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+const ipsLayer = new FeatureLayer({
+    url: "https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0",
+});
+map.add(ipsLayer);
+```
