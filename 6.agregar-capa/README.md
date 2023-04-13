@@ -21,7 +21,8 @@ require([
     "esri/widgets/Directions",
     "esri/layers/RouteLayer",
     /* BLOQUE DE CÓDIGO AGREGADO */
-    "esri/layers/FeatureLayer"
+    "esri/layers/FeatureLayer",
+    "esri/widgets/Legend"
     /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
 ], function(
     esriConfig, 
@@ -38,7 +39,8 @@ require([
     Directions,
     RouteLayer,
     /* BLOQUE DE CÓDIGO AGREGADO */
-    FeatureLayer
+    FeatureLayer,
+    Legend
     /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
 ) {
 ```
@@ -119,3 +121,25 @@ const ipsLayer = new FeatureLayer({
 map.add(ipsLayer);
 ```
 4. Ejecute la aplicación para ver los cambios en la capa [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0).
+## Agregue una leyenda
+El widget [Legend](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Legend.html) describe los símbolos usados para representar capas en un mapa. Todos los simbolos y textos usados en este widget son configurados en el renderizador de la capa. La leyenda solo mostrará las capas y subcapas que sean visibles en la vista. 
+1. Al final del código, en la función principal `function`, cree un widget [`Legend`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Legend.html). Ajuste la propiedad [`view`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#view) como `view`. Agregue la información de la capa de entidades [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0) al arreglo [`layerInfos`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Legend.html#layerInfos).
+```javascript
+const ipsLayer = new FeatureLayer({
+    url: "https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0",
+    renderer: ipsRenderer
+});
+
+map.add(ipsLayer);
+/* BLOQUE DE CÓDIGO AGREGADO */
+const legend = new Legend({
+    view: view,
+    layerInfos: [
+        {
+            layer: ipsLayer,
+            title: "Institución Prestadora de Salud"
+        }
+    ]
+});
+/* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+```
