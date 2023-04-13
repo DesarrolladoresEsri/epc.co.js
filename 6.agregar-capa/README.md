@@ -44,4 +44,19 @@ require([
 ```
 ## Agregue una capa de entidades
 Las _Entidades_ de tipo _Punto_ son tipicamente mostradas en una capa de entidades en la parte superior de todas las demás capas. Use la clase [`FeatureLayer`](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html) para referenciar la capa [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0) y agregar entidades al mapa.
-1. 
+1. En **CodePen**, al final del código de la función principal `function`, cree una [`FeatureLayer`](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html) y ajuste la propiedad [`url`](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html#url).
+```javascript
+const ipsLayer = new FeatureLayer({
+    url: "https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0"
+});
+```
+2. Agregue la capa `ipsLayer` al mapa.
+```javascript
+const ipsLayer = new FeatureLayer({
+    url: "https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0"
+});
+/* BLOQUE DE CÓDIGO AGREGADO */
+map.add(ipsLayer);
+/* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+```
+3. Ejecute la aplicación para ver la _capa_ Instituciones Prestadoras de Salud en el mapa.
