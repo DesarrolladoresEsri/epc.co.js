@@ -83,3 +83,39 @@ const ipsLayer = new FeatureLayer({
 });
 map.add(ipsLayer);
 ```
+2. Cree un renderizador con el nombre `ipsRenderer` y defínalo como [`unique-value`](https://developers.arcgis.com/javascript/latest/api-reference/esri-renderers-UniqueValueRenderer.html). Ajuste la propiedad [`field`](https://developers.arcgis.com/javascript/latest/api-reference/esri-renderers-UniqueValueRenderer.html#field) como `SEDE_PRINC`. En el arreglo [`uniqueValueInfos`](), agregue las URL de imágenes únicas para cada tipo de IPS.
+```javascript
+function createPictureMarkerSymbol(value, url){
+    return {
+        value:value,
+        symbol: {
+            type: "picture-marker",
+            url: url,
+            width: "15px",
+            height: "15px"
+        }
+    }
+}
+/* BLOQUE DE CÓDIGO AGREGADO */
+const ipsRenderer = {
+    type: "unique-value",
+    field: "SEDE_PRINC",
+    uniqueValueInfos: [
+        createPictureMarkerSymbol("SI", "https://static.arcgis.com/images/Symbols/Government/Hospital.png"),
+        createPictureMarkerSymbol("NO", "https://static.arcgis.com/images/Symbols/Government/Hospital-and-Clinics.png")
+    ]
+};
+/* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+```
+3. Agregue la propiedad [`renderer`](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html#renderer) a la capa de entidades [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0). La capa de entidades hará un [autocast](https://developers.arcgis.com/javascript/latest/programming-patterns/#autocasting) de `renderer` y creará instancias del objeto. 
+```javascript
+const ipsLayer = new FeatureLayer({
+    url: "https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0",
+    /* BLOQUE DE CÓDIGO AGREGADO */
+    renderer: ipsRenderer
+    /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+});
+
+map.add(ipsLayer);
+```
+4. Ejecute la aplicación para ver los cambios en la capa [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0).
