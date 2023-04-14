@@ -143,3 +143,6 @@ const legend = new Legend({
 });
 /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
 ```
+## Muestre una ventana emergente
+Usted puede mostras atributs de una capa de entidades cuando los usuarios hacen clic sobre una entidad usando una ventana emergente. Las ventanas emergentes pueden configurarse para mostrar los valores de los atributos en crudo, valores calculados o contenido en diferentes formatos, incluyendo gráficas o multimedia. Los _atributos_ de las entidades también pueden mostrarse en una tabla. Use las clases [`PopupTemplate`](https://developers.arcgis.com/javascript/latest/api-reference/esri-PopupTemplate.html) y [`fieldInfos`](https://developers.arcgis.com/javascript/latest/api-reference/esri-PopupTemplate.html#fieldInfos) para mostrar los nombres y valores de los atributos en una tabla para la _capa de entidades_ [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0). Una de las ventajas de usar una tabla con [`fieldInfos`](https://developers.arcgis.com/javascript/latest/api-reference/esri-PopupTemplate.html#fieldInfos) es la habilidad de dar formato a los valores de los campos en muchas maneras, por ejemplo, mostrar divisas o el número de lugares decimales. 
+1. Cree
