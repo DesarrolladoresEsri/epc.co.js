@@ -49,3 +49,9 @@ require([
     /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
 ) {
 ```
+Cree un widget Editor
+El widget [`Editor`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Editor.html) le da la habilidad de añadir, editar y eliminar entidades de forma interactiva. El widget verificará todas las capas editables en el mapa y las dispondrá automáticamente. 
+1. En **CodePen**, al final del código de la función principal `function`, cree un `editor` y agréguelo a la [`ui`](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-ui-DefaultUI.html) de la vista `view`.
+```js
+
+´´´
