@@ -4,7 +4,7 @@ En este ejercicio, usará una URL para acceder personalizar y mostrar una capa d
 ## Cree un nuevo pen
 1. Para iniciar, use el código del [ejercicio anterior](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/5.rutas/README.md).
 ## Agregue módulos 
-1. En la declaración `require`, agregue el módulo [`FeatureLayer`](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html).
+1. En la declaración `require`, agregue los módulos [`FeatureLayer`](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html) y [`Legend`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Legend.html).
 ```javascript
 require([
     "esri/config", 
@@ -194,3 +194,31 @@ const ipsLayer = new FeatureLayer({
     renderer: ipsRenderer
 });
 ```
+## Acérquese a una capa de entidades _(opcional)_
+El método [queryExtent()](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html#queryExtent) de la clase [FeatureLayer](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html) ejecuta una [Query](https://developers.arcgis.com/javascript/latest/api-reference/esri-rest-support-Query.html) contra el servicio de entidades y retorna el [Extent](https://developers.arcgis.com/javascript/latest/api-reference/esri-geometry-Extent.html) de las entidades que satisfacen la consulta. Si no se especifican parámetros, entonces el extent y al recuento de todas las entidades que satisfacen la configuración y filtros de la capa son retornados.
+> Para consultar la extensión de entidades o gráficos disponibles o visibles en la vista del lado del cliente en vez de hacer una consulta del lado del servidor, debe usar el método [FeatureLayerView.queryExtent()](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-layers-FeatureLayerView.html#queryExtent).
+1. En la función principal `function`, justo despues de agregar la capa de entidades [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0) al mapa, consulte el extent de todas las entidades de la capa.
+```javascript
+map.add(ipsLayer);
+/* BLOQUE DE CÓDIGO AGREGADO */
+ipsLayer.queryExtent().then(function(result){
+    
+});
+/* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+```
+2. Use el método [`goTo()`](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#goTo) de [`view`](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html) para acercarse a la capa de entidades usando el resultado de la consulta. 
+```javascript
+map.add(ipsLayer);
+                
+ipsLayer.queryExtent().then(function(result){
+    /* BLOQUE DE CÓDIGO AGREGADO */
+    view.goTo(result.extent);
+    /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+});
+```
+## Ejecute la aplicación
+En **CodePen**, ejecute su aplicación. El mapa deberá mostrar la capa de entidades [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0) personalizada, el widget [Legend](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Legend.html) en la parte inferior ezquierda del mapa. Haga clic en alguna de las entidades de la capa para ver la ventana emergente. 
+- [Ver ejemplo en vivo]()
+- [Ver código]()
+- [Ir al ejercicio siguiente: ]()
+- [Ir al ejercicio anterior: Calcular rutas](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/5.rutas/README.md)
