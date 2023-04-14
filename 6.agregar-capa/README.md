@@ -1,5 +1,5 @@
 # Agregar Una Capa de Entidades
-Una _capa de entidades_ es un conjunto de datos alojados en un _servicio de entidades_. Cada capa de entidades contiene _entidades: con un solo tipo de _geometría_ (punto, línea o polígono) y un conjunto de _atributos_. Usted puede usar capas de entidades para almacenar, acceder y administrar grandes cantidades de datos geográficos para sus aplicaciones. Puede obtener entidades de una capa de entidades accediendo su URL.  
+Una _capa de entidades_ es un conjunto de datos alojados en un _servicio de entidades_. Cada capa de entidades contiene _entidades_ con un solo tipo de _geometría_ (punto, línea o polígono) y un conjunto de _atributos_. Usted puede usar capas de entidades para almacenar, acceder y administrar grandes cantidades de datos geográficos para sus aplicaciones. Puede obtener entidades de una capa de entidades accediendo su URL.  
 En este ejercicio, usará una URL para acceder personalizar y mostrar una capa de entidades alojada.
 ## Cree un nuevo pen
 1. Para iniciar, use el código del [ejercicio anterior](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/5.rutas/README.md).
