@@ -145,4 +145,52 @@ const legend = new Legend({
 ```
 ## Muestre una ventana emergente
 Usted puede mostras atributs de una capa de entidades cuando los usuarios hacen clic sobre una entidad usando una ventana emergente. Las ventanas emergentes pueden configurarse para mostrar los valores de los atributos en crudo, valores calculados o contenido en diferentes formatos, incluyendo gráficas o multimedia. Los _atributos_ de las entidades también pueden mostrarse en una tabla. Use las clases [`PopupTemplate`](https://developers.arcgis.com/javascript/latest/api-reference/esri-PopupTemplate.html) y [`fieldInfos`](https://developers.arcgis.com/javascript/latest/api-reference/esri-PopupTemplate.html#fieldInfos) para mostrar los nombres y valores de los atributos en una tabla para la _capa de entidades_ [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0). Una de las ventajas de usar una tabla con [`fieldInfos`](https://developers.arcgis.com/javascript/latest/api-reference/esri-PopupTemplate.html#fieldInfos) es la habilidad de dar formato a los valores de los campos en muchas maneras, por ejemplo, mostrar divisas o el número de lugares decimales. 
-1. Cree
+1. En la función principal `function` justo antes de crear la capa de entidades  [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0), cree un `popupIPS`. En la propiedad [`content`](https://developers.arcgis.com/javascript/latest/api-reference/esri-PopupTemplate.html#content) ajuste `type` como `fields` y defina el arreglo [`fieldInfos`](https://developers.arcgis.com/javascript/latest/api-reference/esri-PopupTemplate.html#fieldInfos).
+```javascript
+/* BLOQUE DE CÓDIGO AGREGADO */
+const popupIPS = {
+    title: "{NOMBRE}",
+    content:[{
+        type: "fields",
+        fieldInfos: [
+            {
+                fieldName: "NOMBRE_PRE",
+                label: "Nombre del prestador"
+            },
+            {
+                fieldName: "CODIGO_PRE",
+                label: "Código de habilitación del prestador"
+            },
+            {
+                fieldName: "DIRECCION",
+                label: "Dirección"
+            },
+            {
+                fieldName: "TELEFONO",
+                label: "Teléfono"
+            },
+            {
+                fieldName: "EMAIL",
+                label: "Correo Electrónico"
+            }
+        ]
+    }],
+    lastEditInfoEnabled: false
+}
+/* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+const ipsLayer = new FeatureLayer({
+    url: "https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0",
+    renderer: ipsRenderer
+});
+```
+2. Agregue y ajuste las propiedades [`outfields`](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html#outFields) y [`popupTemplate`](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html#popupTemplate) en la capa de entidades. [`FeatureLayer`](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html) hará un [autocast](https://developers.arcgis.com/javascript/latest/guide/programming-patterns/#autocasting) de [`popupTemplate`](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html#popupTemplate) para crear una instancia de clase del objeto. 
+```javascript
+const ipsLayer = new FeatureLayer({
+    url: "https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0",
+    /* BLOQUE DE CÓDIGO AGREGADO */
+    outFields: ["NOMBRE","NOMBRE_PRE", "CODIGO_PRE", "DIRECCION", "TELEFONO", "EMAIL"],
+    popupTemplate: popupIPS,
+    /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+    renderer: ipsRenderer
+});
+```
