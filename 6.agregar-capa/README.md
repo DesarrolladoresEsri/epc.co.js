@@ -220,5 +220,5 @@ ipsLayer.queryExtent().then(function(result){
 En **CodePen**, ejecute su aplicación. El mapa deberá mostrar la capa de entidades [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0) personalizada, el widget [Legend](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Legend.html) en la parte inferior ezquierda del mapa. Haga clic en alguna de las entidades de la capa para ver la ventana emergente. 
 - [Ver ejemplo en vivo](https://desarrolladoresesri.github.io/epc.co.js/6.agregar-capa/agregar-capa.html)
 - [Ver código](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/6.agregar-capa/agregar-capa.html)
-- [Ir al ejercicio siguiente: ]()
+- [Ir al ejercicio siguiente: Editar una capa de entidades](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/7.editar-capa/README.md)
 - [Ir al ejercicio anterior: Calcular rutas](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/5.rutas/README.md)
