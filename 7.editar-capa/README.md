@@ -51,7 +51,67 @@ require([
 ```
 Cree un widget Editor
 El widget [`Editor`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Editor.html) le da la habilidad de añadir, editar y eliminar entidades de forma interactiva. El widget verificará todas las capas editables en el mapa y las dispondrá automáticamente. 
-1. En **CodePen**, al final del código de la función principal `function`, cree un `editor` y agréguelo a la [`ui`](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-ui-DefaultUI.html) de la vista `view`.
+1. En **CodePen**, al final del código de la función principal `function`, cree un `editor`. Ajuste la propiedad [`view`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#view) como `view`. Cree un arreglo [`layerInfos`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Editor.html#layerInfos) y agregue los elementos del [`formTemplate`](https://developers.arcgis.com/javascript/latest/api-reference/esri-form-FormTemplate.html). Agregue un arreglo [`expressionInfos`](https://developers.arcgis.com/javascript/latest/api-reference/esri-form-ExpressionInfo.html) al [`formTemplate`](https://developers.arcgis.com/javascript/latest/api-reference/esri-form-FormTemplate.html) con una expresión para los valores requeridos. 
 ```js
-
-´´´
+const editor = new Editor({
+    view:view,
+    layerInfos: [{
+        layer: ipsLayer,
+        formTemplate: {
+            elements:[
+                {
+                    type: "field",
+                    fieldName: "NOMBRE",
+                    label: "Nombre",
+                    requiredExpression: "requiredField"
+                },
+                {
+                    type: "field",
+                    fieldName: "NOMBRE_PRE",
+                    label: "Nombre del prestador"
+                },
+                {
+                    type: "field",
+                    fieldName: "CODIGO_PRE",
+                    label: "Código de habilitación del prestador"
+                },
+                {
+                    type: "field",
+                    fieldName: "DIRECCION",
+                    label: "Dirección"
+                },
+                {
+                    type: "field",
+                    fieldName: "TELEFONO",
+                    label: "Teléfono"
+                },
+                {
+                    type: "field",
+                    fieldName: "EMAIL",
+                    label: "Correo Electrónico"
+                },
+                {
+                    type: "field",
+                    fieldName: "SEDE_PRINC",
+                    label: "Es sede principal",
+                    requiredExpression: "requiredField"
+                }
+            ],
+            expressionInfos: [
+                {
+                    name: "requiredField",
+                    expression: "true"
+                }
+            ]
+        }
+    }]
+});
+```
+2. Cree un widget [Expand](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Expand.html) y ajustge las propiedades [`view`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#view) como `view`, [`content`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Expand.html#content) como `editor` y [`autoCollapse`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Expand.html#autoCollapse) como `false`.
+```js
+const edExpand = new Expand({
+    view: view,
+    content: editor,
+    autoCollapse: false
+});
+```
