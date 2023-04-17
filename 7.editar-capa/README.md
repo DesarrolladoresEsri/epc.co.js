@@ -115,3 +115,40 @@ const edExpand = new Expand({
     autoCollapse: false
 });
 ```
+3. Agregue el widget [Expand](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Expand.html) en la parte inferior derecha de su aplicación.
+```js
+const edExpand = new Expand({
+    view: view,
+    content: editor,
+    autoCollapse: false
+});
+/* BLOQUE DE CÓDIGO AGREGADO */
+view.ui.add(edExpand, "bottom-right");
+/* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+```
+
+## Ejecute la aplicación
+En **CodePen**, ejecute su aplicación. 
+1. Haga clic en el botón Editar, ubicado en la esquina inferior derecha de su aplicación. En el widget [`Editor`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Editor.html), seleccione la capa [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0) en el grupo _Crear entidades_ y haga clic en cualquier lugar del mapa para crear una entidad IPS. Incluya los atributos de la siguiente tabla y finalice con el botón _Crear_.  
+
+| Nombre del campo | Valor |
+| ------------- | ------------- |
+| Nombre | Mi IPS |
+| Nombre del prestador | EPN Salud |
+| Código de habilitación del prestador | 1100000000 |
+| Es sede principal | Es sede principal  |
+
+2. En el widget [`Editor`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Editor.html), haga clic en _Seleccionar_ y luego haga clic sobre la entidad que acaba de crear. Escriba los atributos que se muestran en la siguiente tabla y finalice haciendo clic en el botón _Actualizar_.  
+
+| Nombre del campo | Valor |
+| ------------- | ------------- |
+| Nombre | Seguridad Global IPS |
+| Teléfono | 16387272 |
+| Correo Electrónico | contacto@sgips.com |
+
+3. En el widget [`Editor`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Editor.html), haga clic en _Seleccionar_ y luego haga clic sobre la entidad que acaba de crear. Haga clic en el botón _Eliminar_.  
+
+- [Ver ejemplo en vivo]()
+- [Ver código]()
+- [Ir al ejercicio siguiente: Ejecutar análisis]()
+- [Ir al ejercicio anterior: Agregar una capa de entidades](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/6.agregar-capa/README.md)
