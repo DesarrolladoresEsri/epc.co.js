@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <title>ArcGIS Maps SDK for JavaScript: Editar Capas</title>
+
+        <script>
+            esriConfig = {
+                locale: "es"
+            };
+        </script>
+
+        <style>
+            html,
+            body,
+            #viewDiv {
+                padding: 0;
+                margin: 0;
+                height: 100%;
+                width: 100%;
+            }
+        </style>
+        
+        <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css">
+        <script src="https://js.arcgis.com/4.26/"></script>
+        
+        <script>
+            require([
+                "esri/config", 
+                "esri/Map", 
+                "esri/views/MapView",
+                
+                "esri/widgets/BasemapGallery",
+                "esri/widgets/Expand",
+
+                "esri/widgets/Locate",
+
+                "esri/widgets/Search",
+                
+                "esri/widgets/Directions",
+                "esri/layers/RouteLayer",
+
+                "esri/layers/FeatureLayer",
+                "esri/widgets/Legend",
+                
+                "esri/widgets/Editor"
+            ], function(
+                esriConfig, 
+                Map, 
+                MapView,
+                
+                BasemapGallery,
+                Expand,
+
+                Locate,
+                
+                Search,
+
+                Directions,
+                RouteLayer,
+
+                FeatureLayer,
+                Legend,
+                
+                Editor
+            ) {
+                //esriConfig.apiKey = "SU_API_KEY";
+
+                const map = new Map({
+                    basemap: "arcgis-topographic"
+                });
+                
+                const view = new MapView({
+                    map: map,
+                    center: [-74.05142721441229, 4.673855997314436],
+                    zoom: 13, 
+                    container: "viewDiv"
+                });
+                
+                const basemapGallery = new BasemapGallery({
+                    view: view,
+                    source: {
+                        query: {
+                            title: '"World Basemaps for Developers" AND owner:esri'
+                        }
+                    }
+                });
+                
+                const bgExpand = new Expand({
+                    view: view,
+                    content: basemapGallery,
+                    autoCollapse: true
+                });
+                view.ui.add(bgExpand, "top-right");
+                
+                const locate = new Locate({
+                    view: view,
+                    useHeadingEnabled: false,
+                    goToOverride: function(view, options) {
+                        options.target.scale = 1500;
+                        return view.goTo(options.target);
+                    }
+                });
+                view.ui.add(locate, "top-left");
+
+                const search = new Search({
+                    view: view
+                });
+                view.ui.add(search, {
+                    position: "top-left",
+                    index: 0
+                });
+
+                const routeLayer = new RouteLayer();
+                map.layers.add(routeLayer);
+                
+                const directions = new Directions({
+                    view: view,
+                    layer: routeLayer
+                });
+
+                const rtExpand = new Expand({
+                    view: view,
+                    content: directions,
+                    autoCollapse: false
+                });
+                view.ui.add(rtExpand, "top-right");
+                
+                function createPictureMarkerSymbol(value, url){
+                    return {
+                        value:value,
+                        symbol: {
+                            type: "picture-marker",
+                            url: url,
+                            width: "15px",
+                            height: "15px"
+                        }
+                    }
+                }
+                
+                const ipsRenderer = {
+                    type: "unique-value",
+                    field: "SEDE_PRINC",
+                    uniqueValueInfos: [
+                        createPictureMarkerSymbol("SI", "https://static.arcgis.com/images/Symbols/Government/Hospital.png"),
+                        createPictureMarkerSymbol("NO", "https://static.arcgis.com/images/Symbols/Government/Hospital-and-Clinics.png")
+                    ]
+                };
+                
+                const popupIPS = {
+                    title: "{NOMBRE}",
+                    content:[{
+                        type: "fields",
+                        fieldInfos: [
+                            {
+                                fieldName: "NOMBRE_PRE",
+                                label: "Nombre del prestador"
+                            },
+                            {
+                                fieldName: "CODIGO_PRE",
+                                label: "Código de habilitación del prestador"
+                            },
+                            {
+                                fieldName: "DIRECCION",
+                                label: "Dirección"
+                            },
+                            {
+                                fieldName: "TELEFONO",
+                                label: "Teléfono"
+                            },
+                            {
+                                fieldName: "EMAIL",
+                                label: "Correo Electrónico"
+                            }
+                        ]
+                    }],
+                    lastEditInfoEnabled: false
+                }
+                
+                const ipsLayer = new FeatureLayer({
+                    url: "https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0",
+                    outFields: ["NOMBRE","NOMBRE_PRE", "CODIGO_PRE", "DIRECCION", "TELEFONO", "EMAIL"],
+                    popupTemplate: popupIPS,
+                    renderer: ipsRenderer
+                });
+                
+                map.add(ipsLayer);
+                
+                ipsLayer.queryExtent().then(function(result){
+                    view.goTo(result.extent);
+                });
+
+                const legend = new Legend({
+                    view: view,
+                    layerInfos: [
+                        {
+                            layer: ipsLayer,
+                            title: "Institución Prestadora de Salud"
+                        }
+                    ]
+                });
+                view.ui.add(legend, "bottom-left");
+
+                const editor = new Editor({
+                    view:view,
+                    layerInfos: [{
+                        layer: ipsLayer,
+                        formTemplate: {
+                            elements:[
+                                {
+                                    type: "field",
+                                    fieldName: "NOMBRE",
+                                    label: "Nombre",
+                                    requiredExpression: "requiredField"
+                                },
+                                {
+                                    type: "field",
+                                    fieldName: "NOMBRE_PRE",
+                                    label: "Nombre del prestador"
+                                },
+                                {
+                                    type: "field",
+                                    fieldName: "CODIGO_PRE",
+                                    label: "Código de habilitación del prestador"
+                                },
+                                {
+                                    type: "field",
+                                    fieldName: "DIRECCION",
+                                    label: "Dirección"
+                                },
+                                {
+                                    type: "field",
+                                    fieldName: "TELEFONO",
+                                    label: "Teléfono"
+                                },
+                                {
+                                    type: "field",
+                                    fieldName: "EMAIL",
+                                    label: "Correo Electrónico"
+                                },
+                                {
+                                    type: "field",
+                                    fieldName: "SEDE_PRINC",
+                                    label: "Es sede principal",
+                                    requiredExpression: "requiredField"
+                                }
+                            ],
+                            expressionInfos: [
+                                {
+                                    name: "requiredField",
+                                    expression: "true"
+                                }
+                            ]
+                        }
+                    }]
+                });
+                
+                const edExpand = new Expand({
+                    view: view,
+                    content: editor,
+                    autoCollapse: false
+                });
+                view.ui.add(edExpand, "bottom-right");
+            });
+        </script>
+    </head>
+    <body>
+        <div id="viewDiv"></div>
+    </body>
+</html>
