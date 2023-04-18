@@ -148,7 +148,7 @@ En **CodePen**, ejecute su aplicación.
 
 3. En el widget [`Editor`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Editor.html), haga clic en _Seleccionar_ y luego haga clic sobre la entidad que acaba de crear. Haga clic en el botón _Eliminar_.  
 
-- [Ver ejemplo en vivo]()
-- [Ver código]()
-- [Ir al ejercicio siguiente: Ejecutar análisis]()
+- [Ver ejemplo en vivo](https://desarrolladoresesri.github.io/epc.co.js//7.editar-capa/editar-capa.html)
+- [Ver código](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/7.editar-capa/editar-capa.html)
+- [Ir al ejercicio siguiente: Ejecutar análisis](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/8.analisis/README.md)
 - [Ir al ejercicio anterior: Agregar una capa de entidades](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/6.agregar-capa/README.md)
