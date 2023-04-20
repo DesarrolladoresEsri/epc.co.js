@@ -29,14 +29,17 @@ En este ejercicio, usted construirá una herramienta que le permita encontrar la
 <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css">
 <script src="https://js.arcgis.com/4.26/"></script>
 ```
-2. Cree el esquema
-Para crear el esquema, usted usará [`calcite-shell`](https://developers.arcgis.com/calcite-design-system/components/shell/), el cual organiza otros componentes en la página usando espacios. Los espacios (_slots_) son un concepto de componentes web. Puede encontrar una lista completa de componentes para espacios en la [página de referencia](https://developers.arcgis.com/calcite-design-system/components/).  
+2. Cree el esquema. Para crear el esquema, usted usará [`calcite-shell`](https://developers.arcgis.com/calcite-design-system/components/shell/), el cual organiza otros componentes en la página usando espacios. Los espacios (_slots_) son un concepto de componentes web. Puede encontrar una lista completa de componentes para espacios en la [página de referencia](https://developers.arcgis.com/calcite-design-system/components/).  
 - En el elemento `<body>` de su código **HTML**, agregue el componente [`calcite-shell`](https://developers.arcgis.com/calcite-design-system/components/shell/). Ajuste el atributo [`content-behind`](https://developers.arcgis.com/calcite-design-system/components/shell/#component-api-properties-contentBehind) para que los usuarios puedan interactuar con el mapa que está debajo del [`calcite-shell`](https://developers.arcgis.com/calcite-design-system/components/shell/).
+- Agregue un elemento `h3` y ubíquelo en el espacio [`header`](https://developers.arcgis.com/calcite-design-system/components/shell/#component-api-slots-header).
 - Agregue el componente [`calcite-shell-panel`](https://developers.arcgis.com/calcite-design-system/components/shell-panel/), ubicándolo en el espacio [`panel-start`](https://developers.arcgis.com/calcite-design-system/components/shell/#component-api-slots-panel-start). Ajuste la propiedad [`detached`](https://developers.arcgis.com/calcite-design-system/components/shell-panel/#component-api-properties-detached) para que el contenido del panel aparezca sobre el mapa.
 ```html
 <body>
     <!-- BLOQUE DE CÓDIGO AGREGADO -->
     <calcite-shell content-behind>
+        <h3 id="header-title" slot="header">
+            Introducción al desarrollo de Alicaciones Web
+        </h3>
         <calcite-shell-panel slot="panel-start" detached>
 
         </calcite-shell-panel>
@@ -47,3 +50,4 @@ Para crear el esquema, usted usará [`calcite-shell`](https://developers.arcgis.
     <!-- FIN DEL BLOQUE DE CÓDIGO AGREGADO -->
 </body>
 ```
+3. Agregue los componentes usados para acceder a las herramientas. Los componentes del [`calcite-panel`](https://developers.arcgis.com/calcite-design-system/components/panel/) tendrán contenedores para su herramienta. El panel iniciara oculto y los usuarios pueden mostrarlo usando la [`calcite-action`](https://developers.arcgis.com/calcite-design-system/components/action/) correspondiente. Agregue un componente [`calcite-action-bar`](https://developers.arcgis.com/calcite-design-system/components/action-bar/) y agreguela al espacio [`action-bar`](https://developers.arcgis.com/calcite-design-system/components/shell-panel/#component-api-slots-action-bar) del [`calcite-shell-panel`](https://developers.arcgis.com/calcite-design-system/components/shell-panel/). Agregue un componente [`calcite-action`](https://developers.arcgis.com/calcite-design-system/components/action/), el cual abrirá el panel cuando se haga clic sobre él. Ajuste el atributo [`icon`](https://developers.arcgis.com/calcite-design-system/components/action/#component-api-properties-icon) como `analysis`. Puede ver más opciones en [Iconos de Calcite](https://developers.arcgis.com/calcite-design-system/icons/). Ajuste el atributo [`text`](https://developers.arcgis.com/calcite-design-system/components/action/#component-api-properties-text), que se mostrará cuando se expanda la barra de acciones. 
