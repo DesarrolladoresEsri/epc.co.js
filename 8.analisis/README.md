@@ -50,4 +50,44 @@ En este ejercicio, usted construirá una herramienta que le permita encontrar la
     <!-- FIN DEL BLOQUE DE CÓDIGO AGREGADO -->
 </body>
 ```
-3. Agregue los componentes usados para acceder a las herramientas. Los componentes del [`calcite-panel`](https://developers.arcgis.com/calcite-design-system/components/panel/) tendrán contenedores para su herramienta. El panel iniciara oculto y los usuarios pueden mostrarlo usando la [`calcite-action`](https://developers.arcgis.com/calcite-design-system/components/action/) correspondiente. Agregue un componente [`calcite-action-bar`](https://developers.arcgis.com/calcite-design-system/components/action-bar/) y agreguela al espacio [`action-bar`](https://developers.arcgis.com/calcite-design-system/components/shell-panel/#component-api-slots-action-bar) del [`calcite-shell-panel`](https://developers.arcgis.com/calcite-design-system/components/shell-panel/). Agregue un componente [`calcite-action`](https://developers.arcgis.com/calcite-design-system/components/action/), el cual abrirá el panel cuando se haga clic sobre él. Ajuste el atributo [`icon`](https://developers.arcgis.com/calcite-design-system/components/action/#component-api-properties-icon) como `analysis`. Puede ver más opciones en [Iconos de Calcite](https://developers.arcgis.com/calcite-design-system/icons/). Ajuste el atributo [`text`](https://developers.arcgis.com/calcite-design-system/components/action/#component-api-properties-text), que se mostrará cuando se expanda la barra de acciones. 
+3. Agregue los componentes usados para acceder a las herramientas. Los componentes del [`calcite-panel`](https://developers.arcgis.com/calcite-design-system/components/panel/) tendrán contenedores para su herramienta. El panel iniciara oculto y los usuarios pueden mostrarlo usando la [`calcite-action`](https://developers.arcgis.com/calcite-design-system/components/action/) correspondiente. Agregue un componente [`calcite-action-bar`](https://developers.arcgis.com/calcite-design-system/components/action-bar/) y agreguela al espacio [`action-bar`](https://developers.arcgis.com/calcite-design-system/components/shell-panel/#component-api-slots-action-bar) del [`calcite-shell-panel`](https://developers.arcgis.com/calcite-design-system/components/shell-panel/). Agregue un componente [`calcite-action`](https://developers.arcgis.com/calcite-design-system/components/action/), el cual abrirá el panel cuando se haga clic sobre él. Ajuste el atributo [`icon`](https://developers.arcgis.com/calcite-design-system/components/action/#component-api-properties-icon) como `analysis`. Puede ver más opciones en [Iconos de Calcite](https://developers.arcgis.com/calcite-design-system/icons/). Ajuste el atributo [`text`](https://developers.arcgis.com/calcite-design-system/components/action/#component-api-properties-text), que se mostrará cuando se expanda la barra de acciones. Ajuste el atributo global `data-action-id`, el cual se usará para hacer las acciones interactivas. 
+```html
+<body>
+    <calcite-shell content-behind>
+        <h3 id="header-title" slot="header">
+            Introducción al desarrollo de Alicaciones Web
+        </h3>
+        <calcite-shell-panel slot="panel-start" detached>
+            <!-- BLOQUE DE CÓDIGO AGREGADO -->
+            <calcite-action-bar slot="action-bar">
+                <calcite-action data-action-id="analysis" icon="analysis" text="Análisis"></calcite-action>
+            </calcite-action-bar>
+            <!-- FIN DEL BLOQUE DE CÓDIGO AGREGADO -->
+        </calcite-shell-panel>
+        <div id="viewDiv"></div>
+    </calcite-shell>
+</body>
+```
+4. Debajo de la barra de acciones, agregue un componente [`calcite-panel`](https://developers.arcgis.com/calcite-design-system/components/panel/). Agregue componentes [`calcite-block`](https://developers.arcgis.com/calcite-design-system/components/block/) con instrucciones de uso de su herramienta. Agregue un elemento `<div>` para agregar un widget de búsqueda, que se usará para definir el punto de inicio de su herramienta. Agregue un [`calcite-button`](https://developers.arcgis.com/calcite-design-system/components/button/) que le permitirá a sus usuarios ejecutar su herramienta. 
+```html
+<calcite-shell-panel slot="panel-start" detached>
+    <calcite-action-bar slot="action-bar">
+        <calcite-action data-action-id="analysis" icon="analysis" text="Análisis"></calcite-action>
+    </calcite-action-bar>
+    <!-- BLOQUE DE CÓDIGO AGREGADO -->
+    <calcite-panel heading="Análisis" data-panel-id="analysis" hidden>
+        <calcite-block heading="Instalaciones cercanas" description="El cálculo de ruta de instalaciones cercanas le permite encontrar una o más instalaciones cercanas a partir de un incidente. Use el buscador para definir un punto de partida."></calcite-block>
+
+        <div id="analysis-content" style="width: auto;"></div>
+
+        <calcite-block heading="Calcular" description="Una vez haya definido el punto de partida, haga clic en Ejecutar para encontrar las IPC más cercanas y ver la ruta.">
+
+        </calcite-block>
+
+        <calcite-button data-action-id="perform-analysis" icon-start="find-path" slot="footer-actions" disabled="true">
+            Ejecutar
+        </calcite-button>
+    </calcite-panel>
+    <!-- FIN DEL BLOQUE DE CÓDIGO AGREGADO -->
+</calcite-shell-panel>
+```
