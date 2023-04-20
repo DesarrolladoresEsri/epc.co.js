@@ -91,3 +91,70 @@ En este ejercicio, usted construirá una herramienta que le permita encontrar la
     <!-- FIN DEL BLOQUE DE CÓDIGO AGREGADO -->
 </calcite-shell-panel>
 ```
+5. Al final del código JavaScript, en la función principal `function`, espere a que la vista `view` termina de cargar asíncronamente. Dentro de la función `view.when()`, inicialice una variable para almacenar el nombre del panel que está abierto actualmente. Esto le permitirá agregar más herramientas o widgets con facilidad a la barra en el futuro. Cree una función que se ejecutará cuando cuando se haga clic sobre una acción. La función cerrará el panel activo y abrirá el panel correspondiente a la acción sobre la que se haga clic. Cree un `addEventListener` en la [`calcite-action-bar`](https://developers.arcgis.com/calcite-design-system/components/action-bar/).
+```js
+view.when(() => {
+    let activeWidget;
+
+    const handleActionBarClick = ({target}) => {
+        if (target.tagName !== "CALCITE-ACTION") {
+            return;
+        }
+
+        if (activeWidget) {
+            document.querySelector(`[data-action-id=${activeWidget}]`).active = false;
+            document.querySelector(`[data-panel-id=${activeWidget}]`).hidden = true;
+        }
+
+        const nextWidget = target.dataset.actionId;
+        if (nextWidget !== activeWidget) {
+            document.querySelector(`[data-action-id=${nextWidget}]`).active = true;
+            document.querySelector(`[data-panel-id=${nextWidget}]`).hidden = false;
+            activeWidget = nextWidget;
+        } else {
+            activeWidget = null;
+        }
+    };
+
+    document.querySelector("calcite-action-bar").addEventListener("click", handleActionBarClick);
+});
+```
+6. Al final de la función `view.when()`, agregue un `addEventListener` en el [`calciteActionBarToggle`](https://developers.arcgis.com/calcite-design-system/components/action-bar/#component-api-events-calciteActionBarToggle) para añadir o remover `padding` a la vista cuando se expando o colapsa la barra. 
+```js
+view.when(() => {
+    let activeWidget;
+
+    const handleActionBarClick = ({target}) => {
+        if (target.tagName !== "CALCITE-ACTION") {
+            return;
+        }
+
+        if (activeWidget) {
+            document.querySelector(`[data-action-id=${activeWidget}]`).active = false;
+            document.querySelector(`[data-panel-id=${activeWidget}]`).hidden = true;
+        }
+
+        const nextWidget = target.dataset.actionId;
+        if (nextWidget !== activeWidget) {
+            document.querySelector(`[data-action-id=${nextWidget}]`).active = true;
+            document.querySelector(`[data-panel-id=${nextWidget}]`).hidden = false;
+            activeWidget = nextWidget;
+        } else {
+            activeWidget = null;
+        }
+    };
+
+    document.querySelector("calcite-action-bar").addEventListener("click", handleActionBarClick);
+
+    /* BLOQUE DE CÓDIGO AGREGADO */
+    let actionBarExpanded = false;
+
+    document.addEventListener("calciteActionBarToggle", event => {
+        actionBarExpanded = !actionBarExpanded;
+        view.padding = {
+            left: actionBarExpanded ? 135 : 45
+        }
+    });
+    /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+});
+```
