@@ -439,6 +439,6 @@ document.querySelector(`[data-action-id=perform-analysis]`).addEventListener("cl
 ```
 ## Ejecute la aplicación
 En **CodePen**, ejecute su aplicación. Haga clic en la acción de la barra de herramientas para abrir el panel. Busque una dirección en la localidad de Usaquén, en Bogotá, usando el widget Search del panel. El mapa deberá mostrar las rutas a una o varias instalaciones de su capa de entidades.  
-- [Ver ejemplo en vivo]()
-- [Ver código]()
+- [Ver ejemplo en vivo](https://desarrolladoresesri.github.io/epc.co.js/8.analisis/analisis.html)
+- [Ver código](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/8.analisis/analisis.html)
 - [Ir al ejercicio anterior](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/7.editar-capa/README.md)
