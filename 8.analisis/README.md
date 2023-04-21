@@ -7,7 +7,7 @@ Puede usar el servicio [Closest facility routing](https://developers.arcgis.com/
 
 En este ejercicio, usted construirá una herramienta que le permita encontrar las 3 instalaciones más cercanas a su ubicación y mostrar el recorrido.  
 ## Cree un nuevo pen 
-1. para iniciar, use el código del [ejercicio anterior](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/7.editar-capa/README.md).
+1. Para iniciar, use el código del [ejercicio anterior](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/7.editar-capa/README.md).
 ## Agregue una barra de herramientas  calcite
 [Calcite Design System](https://developers.arcgis.com/calcite-design-system/) es una colección de recursos de diseño y desarrollo para crear aplicaciones cohesivas con experiencias atractivas y fáciles de usar con un esfuerzo mínimo. Este incluye un kit de UI, iconos, esquemas de colores y una librería de componentes web con elementos de UI como botones, páneles, alertas y mucho más. Agregue una barra de [Calcite Design System](https://developers.arcgis.com/calcite-design-system/) a su aplicación.
 1. En el elemento `<head>` de su código **HTML**, agregue las referencias a los componentes de Calcite.
