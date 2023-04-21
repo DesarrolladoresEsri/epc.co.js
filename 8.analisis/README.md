@@ -266,6 +266,36 @@ const anSearch = new Search({
 });
 /* BLOQUE DE CÓDIGO AGREGADO */
 const cfRouteLayer = new GraphicsLayer();
-map.add(cfRouteLayer,0);
+map.add(cfRouteLayer, 0);
 /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+```
+2. Cree una función `setCFRouteSymbol` para definir el símbolo de las rutas basado en un índice.
+```js
+function setCFRouteSymbol(index){
+    if (index == 0){
+        return {
+            type: "simple-line",
+            color: [237, 81, 81, 0.75],
+            width: "5",
+        }
+    } else if (index == 1) {
+        return {
+            type: "simple-line",
+            color: [20, 158, 206, 0.75],
+            width: "5",
+        }
+    } else if (index == 2) {
+            return {
+            type: "simple-line",
+            color: [167, 198, 54, 0.75],
+            width: "5",
+        }
+    } else {
+        return {
+            type: "simple-line",
+            color: [60, 175, 153, 0.75],
+            width: "5",
+        }
+    }
+}
 ```
