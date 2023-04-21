@@ -299,3 +299,56 @@ function setCFRouteSymbol(index){
     }
 }
 ```
+## Agregue eventos al widget Search
+1. Al final de la función principal `function`, cree una variable para almacenar el punto de partida del análisis.
+```js
+let startPoint;
+```
+2. Agregue el evento [`search-complete`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#event-search-complete) al widget [`Search`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html) del panel. Si hay uno o más resultados, habilite el botón _Ejecutar_ y asigne el resultado de la búsqueda a la variable `startPoint`.
+```js
+let startPoint;
+/* BLOQUE DE CÓDIGO AGREGADO */
+anSearch.on("search-complete", function(event){
+    if (event.numResults > 0){
+        document.querySelector(`[data-action-id=perform-analysis]`).disabled = false;
+        startPoint = event.results[0].results[0].feature;
+    }     
+});
+/* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+```
+3. Agregue el evento [`search-clear`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#event-search-clear) al widget [`Search`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html) del panel. Remueva todos los gráficos de la capa de gráficos y deshabilite el botón _Ejecutar_.
+```js
+anSearch.on("search-complete", function(event){
+    if (event.numResults > 0){
+        document.querySelector(`[data-action-id=perform-analysis]`).disabled = false;
+        startPoint = event.results[0].results[0].feature;
+    }     
+});
+/* BLOQUE DE CÓDIGO AGREGADO */
+anSearch.on("search-clear", function(event){
+    cfRouteLayer.removeAll();
+    document.querySelector(`[data-action-id=perform-analysis]`).disabled = true;
+});
+/* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+```
+## Resuelva la búsqueda de instalaciones cercanas
+1. Inicialice una variable con la [URL](https://developers.arcgis.com/documentation/mapping-apis-and-services/routing/closest-facility-routing/#url-requests) del servicio de cálculo de ruta de instalaciones cercanas. 
+```js
+anSearch.on("search-clear", function(event){
+    cfRouteLayer.removeAll();
+    document.querySelector(`[data-action-id=perform-analysis]`).disabled = true;
+});
+/* BLOQUE DE CÓDIGO AGREGADO */
+const closestFacilityUrl = 'https://route-api.arcgis.com/arcgis/rest/services/World/ClosestFacility/NAServer/ClosestFacility_World/solveClosestFacility';
+/* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+```
+2. Cree una función `findClosestFacility`. Dentro de la función, remueva todos los gráficos de la capa de gráficos.
+```js
+const closestFacilityUrl = 'https://route-api.arcgis.com/arcgis/rest/services/World/ClosestFacility/NAServer/ClosestFacility_World/solveClosestFacility';
+/* BLOQUE DE CÓDIGO AGREGADO */
+function findClosestFacility(){
+    cfRouteLayer.removeAll();
+    
+}
+/* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+```
