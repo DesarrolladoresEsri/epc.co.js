@@ -352,3 +352,47 @@ function findClosestFacility(){
 }
 /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
 ```
+3. Dentro de la función `findClosestFacility` defina los parámetros de una consulta geográfica para la capa de entidades [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0). Ajuste los parámetros `spatialRelationship` como `intersects`, `geometry` como `startPoint.geometry`, `distance` como `meters`, `outSpatialReference` como `{wkid: 4326}`, `returnGeometry` como `true` y `outFields` como `["OBJECTID"]`.
+```js
+function findClosestFacility(){
+    cfRouteLayer.removeAll();
+    /* BLOQUE DE CÓDIGO AGREGADO */
+    const queryParams = {
+        spatialRelationship: "intersects",
+        geometry: startPoint.geometry,
+        distance: 2000,
+        units: "meters",
+        outSpatialReference: {wkid: 4326},
+        returnGeometry: true,
+        outFields:["OBJECTID"]
+    };
+    /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+}
+```
+4. Ejecute una consulta de entidades sobre la capa [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0). Use los resultados para definir los parámetros del cálculo de ruta de instalaciones cercanas. 
+```js
+function findClosestFacility(){
+    cfRouteLayer.removeAll();
+
+    const queryParams = {
+        spatialRelationship: "intersects",
+        geometry: startPoint.geometry,
+        distance: 2000,
+        units: "meters",
+        outSpatialReference: {wkid: 4326},
+        returnGeometry: true,
+        outFields:["OBJECTID"]
+    };
+    /* BLOQUE DE CÓDIGO AGREGADO */
+    ipsLayer.queryFeatures(queryParams).then(function(results){
+        let closestFacilityParams = new ClosestFacilityParameters({
+            facilities: results,
+            incidents: new FeatureSet({features: [startPoint]}),
+            returnRoutes: true,
+            returnFacilities: false,
+            defaultTargetFacilityCount: 3
+        });
+    });
+    /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+}
+```
