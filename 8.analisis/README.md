@@ -396,3 +396,49 @@ function findClosestFacility(){
     /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
 }
 ```
+5. Use el método [`solve()`](https://developers.arcgis.com/javascript/latest/api-reference/esri-rest-closestFacility.html#solve) de [`closestFacility`](https://developers.arcgis.com/javascript/latest/api-reference/esri-rest-closestFacility.html) para encontrar el camino a las tres instalaciones más cercanas.
+```js
+function findClosestFacility(){
+    cfRouteLayer.removeAll();
+
+    const queryParams = {
+        spatialRelationship: "intersects",
+        geometry: startPoint.geometry,
+        distance: 2000,
+        units: "meters",
+        outSpatialReference: {wkid: 4326},
+        returnGeometry: true,
+        outFields:["OBJECTID"]
+    };
+
+    ipsLayer.queryFeatures(queryParams).then(function(results){
+        let closestFacilityParams = new ClosestFacilityParameters({
+            facilities: results,
+            incidents: new FeatureSet({features: [startPoint]}),
+            returnRoutes: true,
+            returnFacilities: false,
+            defaultTargetFacilityCount: 3
+        });
+        /* BLOQUE DE CÓDIGO AGREGADO */
+        closestFacility.solve(closestFacilityUrl, closestFacilityParams).then(function(solveResults){
+            solveResults.routes.features.forEach((route, i) => {
+                route.symbol = setCFRouteSymbol(i);
+                cfRouteLayer.add(route);
+            });
+            view.goTo({
+                target: solveResults.routes.features
+            });
+        });
+        /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+    }); 
+}
+```
+6. Agregue un `addEventListener` al botón del panel.
+```js
+document.querySelector(`[data-action-id=perform-analysis]`).addEventListener("click", findClosestFacility);
+```
+## Ejecute la aplicación
+En **CodePen**, ejecute su aplicación. Haga clic en la acción de la barra de herramientas para abrir el panel. Busque una dirección en la localidad de Usaquén, en Bogotá, usando el widget Search del panel. El mapa deberá mostrar las rutas a una o varias instalaciones de su capa de entidades.  
+- [Ver ejemplo en vivo]()
+- [Ver código]()
+- [Ir al ejercicio anterior](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/7.editar-capa/README.md)
