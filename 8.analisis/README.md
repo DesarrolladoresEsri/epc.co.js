@@ -8,7 +8,7 @@ Puede usar el servicio [Closest facility routing](https://developers.arcgis.com/
 En este ejercicio, usted construirá una herramienta que le permita encontrar las 3 instalaciones más cercanas a su ubicación y mostrar el recorrido.  
 ## Cree un nuevo pen 
 1. para iniciar, use el código del [ejercicio anterior](https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/7.editar-capa/README.md).
-## Agregue una barra de calcite
+## Agregue una barra de herramientas  calcite
 [Calcite Design System](https://developers.arcgis.com/calcite-design-system/) es una colección de recursos de diseño y desarrollo para crear aplicaciones cohesivas con experiencias atractivas y fáciles de usar con un esfuerzo mínimo. Este incluye un kit de UI, iconos, esquemas de colores y una librería de componentes web con elementos de UI como botones, páneles, alertas y mucho más. Agregue una barra de [Calcite Design System](https://developers.arcgis.com/calcite-design-system/) a su aplicación.
 1. En el elemento `<head>` de su código **HTML**, agregue las referencias a los componentes de Calcite.
 ```html
@@ -156,5 +156,104 @@ view.when(() => {
         }
     });
     /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+});
+```
+7. Agregue la propiedad [`padding`](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#padding) a la vista `view`. Con esto, dará espacio a los elementos de Calcite que se han agregado. 
+```js
+const view = new MapView({
+    map: map,
+    center: [-74.05142721441229, 4.673855997314436],
+    zoom: 13, 
+    container: "viewDiv",
+    /* BLOQUE DE CÓDIGO AGREGADO */
+    padding:{
+        left: 50
+    }
+    /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+});
+```
+8. Dentro del elemento `<head>`, en el elemento `<style>` de su código **HTML**, agregue código **CSS** adicional para mejorar la interfaz de usuario. 
+```html
+<style>
+    html,
+    body,
+    #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+    }
+    /* BLOQUE DE CÓDIGO AGREGADO */
+    body {
+        display: flex;
+    }
+
+    #header-title {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+</style>
+```
+## Agregue módulos
+1. En la declaración `require`, agregue los módulos [`FeatureSet`](https://developers.arcgis.com/javascript/latest/api-reference/esri-rest-support-FeatureSet.html),  [`closestFacility`](https://developers.arcgis.com/javascript/latest/api-reference/esri-rest-closestFacility.html), [`ClosestFacilityParameters`](https://developers.arcgis.com/javascript/latest/api-reference/esri-rest-support-ClosestFacilityParameters.html) y [`GraphicsLayer`](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-GraphicsLayer.html).
+```js
+require([
+    "esri/config", 
+    "esri/Map", 
+    "esri/views/MapView",
+
+    "esri/widgets/BasemapGallery",
+    "esri/widgets/Expand",
+
+    "esri/widgets/Locate",
+
+    "esri/widgets/Search",
+
+    "esri/widgets/Directions",
+    "esri/layers/RouteLayer",
+
+    "esri/layers/FeatureLayer",
+    "esri/widgets/Legend",
+
+    "esri/widgets/Editor",
+
+    "esri/rest/support/FeatureSet",
+    "esri/rest/closestFacility",
+    "esri/rest/support/ClosestFacilityParameters",
+    "esri/layers/GraphicsLayer",
+], function(
+    esriConfig, 
+    Map, 
+    MapView,
+
+    BasemapGallery,
+    Expand,
+
+    Locate,
+
+    Search,
+
+    Directions,
+    RouteLayer,
+
+    FeatureLayer,
+    Legend,
+
+    Editor,
+    /* BLOQUE DE CÓDIGO AGREGADO */
+    FeatureSet,
+    closestFacility, 
+    ClosestFacilityParameters,
+    GraphicsLayer
+    /* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+) {
+```
+## Agregue un widget Search al panel
+Este segundo widget [`Search`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html) le permitirá establecer el punto de inicio para calcular rutas hacia las instalaciones más cercanas de la capa [Institución Prestadora de Salud](https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0).
+1. Al final del código en la función principal `function`, cree un widget [`Search`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html). Ajuste la propiedad [`container`](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#container) como `analysis-content`.
+```js
+const anSearch = new Search({
+    container: "analysis-content"
 });
 ```
