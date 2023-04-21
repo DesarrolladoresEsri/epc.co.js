@@ -257,3 +257,15 @@ const anSearch = new Search({
     container: "analysis-content"
 });
 ```
+## Agregue una capa de gráficos
+Una capa de gráficos es un contenedor para gráficos. Es usada con una vista de mapa para mostrar gráficos en un mapa. Puede añadir más de una capa de gráficos a una vista de mapa. Cree una capa de gráficos para mostrar las rutas resultado de su análisis. 
+1. Cree una [`GraphicsLayer`](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-GraphicsLayer.html) y agréguela al mapa. 
+```js
+const anSearch = new Search({
+    container: "analysis-content"
+});
+/* BLOQUE DE CÓDIGO AGREGADO */
+const cfRouteLayer = new GraphicsLayer();
+map.add(cfRouteLayer,0);
+/* FIN DEL BLOQUE DE CÓDIGO AGREGADO */
+```
