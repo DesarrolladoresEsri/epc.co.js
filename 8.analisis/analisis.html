@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <title>ArcGIS Maps SDK for JavaScript: Editar Capas</title>
+
+        <script>
+            esriConfig = {
+                locale: "es"
+            };
+        </script>
+
+        <style>
+            html,
+            body,
+            #viewDiv {
+                padding: 0;
+                margin: 0;
+                height: 100%;
+                width: 100%;
+            }
+
+            body {
+                display: flex;
+            }
+
+            #header-title {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+        </style>
+
+        <script src="https://js.arcgis.com/calcite-components/1.2.0/calcite.esm.js" type="module"></script>
+        <link rel="stylesheet" href="https://js.arcgis.com/calcite-components/1.2.0/calcite.css" />
+
+        <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css">
+        <script src="https://js.arcgis.com/4.26/"></script>
+        
+        <script>
+            require([
+                "esri/config", 
+                "esri/Map", 
+                "esri/views/MapView",
+                
+                "esri/widgets/BasemapGallery",
+                "esri/widgets/Expand",
+
+                "esri/widgets/Locate",
+
+                "esri/widgets/Search",
+                
+                "esri/widgets/Directions",
+                "esri/layers/RouteLayer",
+
+                "esri/layers/FeatureLayer",
+                "esri/widgets/Legend",
+                
+                "esri/widgets/Editor",
+
+                "esri/rest/support/FeatureSet",
+                "esri/rest/closestFacility",
+                "esri/rest/support/ClosestFacilityParameters",
+                "esri/layers/GraphicsLayer",
+            ], function(
+                esriConfig, 
+                Map, 
+                MapView,
+                
+                BasemapGallery,
+                Expand,
+
+                Locate,
+                
+                Search,
+
+                Directions,
+                RouteLayer,
+
+                FeatureLayer,
+                Legend,
+                
+                Editor,
+
+                FeatureSet,
+                closestFacility, 
+                ClosestFacilityParameters,
+                GraphicsLayer
+            ) {
+                //esriConfig.apiKey = "SU_API_KEY";
+
+                const map = new Map({
+                    basemap: "arcgis-topographic"
+                });
+                
+                const view = new MapView({
+                    map: map,
+                    center: [-74.05142721441229, 4.673855997314436],
+                    zoom: 13, 
+                    container: "viewDiv",
+                    padding:{
+                        left: 50
+                    }
+                });
+
+                const basemapGallery = new BasemapGallery({
+                    view: view,
+                    source: {
+                        query: {
+                            title: '"World Basemaps for Developers" AND owner:esri'
+                        }
+                    }
+                });
+                
+                const bgExpand = new Expand({
+                    view: view,
+                    content: basemapGallery,
+                    autoCollapse: true
+                });
+                view.ui.add(bgExpand, "top-right");
+                
+                const locate = new Locate({
+                    view: view,
+                    useHeadingEnabled: false,
+                    goToOverride: function(view, options) {
+                        options.target.scale = 1500;
+                        return view.goTo(options.target);
+                    }
+                });
+                view.ui.add(locate, "top-left");
+
+                const search = new Search({
+                    view: view
+                });
+                view.ui.add(search, {
+                    position: "top-left",
+                    index: 0
+                });
+
+                const routeLayer = new RouteLayer();
+                map.layers.add(routeLayer);
+                
+                const directions = new Directions({
+                    view: view,
+                    layer: routeLayer
+                });
+
+                const rtExpand = new Expand({
+                    view: view,
+                    content: directions,
+                    autoCollapse: false
+                });
+                view.ui.add(rtExpand, "top-right");
+                
+                function createPictureMarkerSymbol(value, url){
+                    return {
+                        value:value,
+                        symbol: {
+                            type: "picture-marker",
+                            url: url,
+                            width: "15px",
+                            height: "15px"
+                        }
+                    }
+                }
+                
+                const ipsRenderer = {
+                    type: "unique-value",
+                    field: "SEDE_PRINC",
+                    uniqueValueInfos: [
+                        createPictureMarkerSymbol("SI", "https://static.arcgis.com/images/Symbols/Government/Hospital.png"),
+                        createPictureMarkerSymbol("NO", "https://static.arcgis.com/images/Symbols/Government/Hospital-and-Clinics.png")
+                    ]
+                };
+                
+                const popupIPS = {
+                    title: "{NOMBRE}",
+                    content:[{
+                        type: "fields",
+                        fieldInfos: [
+                            {
+                                fieldName: "NOMBRE_PRE",
+                                label: "Nombre del prestador"
+                            },
+                            {
+                                fieldName: "CODIGO_PRE",
+                                label: "Código de habilitación del prestador"
+                            },
+                            {
+                                fieldName: "DIRECCION",
+                                label: "Dirección"
+                            },
+                            {
+                                fieldName: "TELEFONO",
+                                label: "Teléfono"
+                            },
+                            {
+                                fieldName: "EMAIL",
+                                label: "Correo Electrónico"
+                            }
+                        ]
+                    }],
+                    lastEditInfoEnabled: false
+                }
+                
+                const ipsLayer = new FeatureLayer({
+                    url: "https://services.arcgis.com/DDzi7vRExVRMO5AB/arcgis/rest/services/Instituci%C3%B3n_Prestadora_de_Salud/FeatureServer/0",
+                    outFields: ["NOMBRE","NOMBRE_PRE", "CODIGO_PRE", "DIRECCION", "TELEFONO", "EMAIL"],
+                    popupTemplate: popupIPS,
+                    renderer: ipsRenderer
+                });
+                
+                map.add(ipsLayer);
+                
+                ipsLayer.queryExtent().then(function(result){
+                    view.goTo(result.extent);
+                });
+
+                const legend = new Legend({
+                    view: view,
+                    layerInfos: [
+                        {
+                            layer: ipsLayer,
+                            title: "Institución Prestadora de Salud"
+                        }
+                    ]
+                });
+                view.ui.add(legend, "bottom-left");
+
+                const editor = new Editor({
+                    view:view,
+                    layerInfos: [{
+                        layer: ipsLayer,
+                        formTemplate: {
+                            elements:[
+                                {
+                                    type: "field",
+                                    fieldName: "NOMBRE",
+                                    label: "Nombre",
+                                    requiredExpression: "requiredField"
+                                },
+                                {
+                                    type: "field",
+                                    fieldName: "NOMBRE_PRE",
+                                    label: "Nombre del prestador"
+                                },
+                                {
+                                    type: "field",
+                                    fieldName: "CODIGO_PRE",
+                                    label: "Código de habilitación del prestador"
+                                },
+                                {
+                                    type: "field",
+                                    fieldName: "DIRECCION",
+                                    label: "Dirección"
+                                },
+                                {
+                                    type: "field",
+                                    fieldName: "TELEFONO",
+                                    label: "Teléfono"
+                                },
+                                {
+                                    type: "field",
+                                    fieldName: "EMAIL",
+                                    label: "Correo Electrónico"
+                                },
+                                {
+                                    type: "field",
+                                    fieldName: "SEDE_PRINC",
+                                    label: "Es sede principal",
+                                    requiredExpression: "requiredField"
+                                }
+                            ],
+                            expressionInfos: [
+                                {
+                                    name: "requiredField",
+                                    expression: "true"
+                                }
+                            ]
+                        }
+                    }]
+                });
+                
+                const edExpand = new Expand({
+                    view: view,
+                    content: editor,
+                    autoCollapse: false
+                });
+                view.ui.add(edExpand, "bottom-right");
+
+                view.when(() => {
+                    let activeWidget;
+
+                    const handleActionBarClick = ({target}) => {
+                        if (target.tagName !== "CALCITE-ACTION") {
+                            return;
+                        }
+
+                        if (activeWidget) {
+                            document.querySelector(`[data-action-id=${activeWidget}]`).active = false;
+                            document.querySelector(`[data-panel-id=${activeWidget}]`).hidden = true;
+                        }
+
+                        const nextWidget = target.dataset.actionId;
+                        if (nextWidget !== activeWidget) {
+                            document.querySelector(`[data-action-id=${nextWidget}]`).active = true;
+                            document.querySelector(`[data-panel-id=${nextWidget}]`).hidden = false;
+                            activeWidget = nextWidget;
+                        } else {
+                            activeWidget = null;
+                        }
+                    };
+
+                    document.querySelector("calcite-action-bar").addEventListener("click", handleActionBarClick);
+
+                    let actionBarExpanded = false;
+
+                    document.addEventListener("calciteActionBarToggle", event => {
+                        actionBarExpanded = !actionBarExpanded;
+                        view.padding = {
+                            left: actionBarExpanded ? 135 : 45
+                        }
+                    });
+                });
+
+                const anSearch = new Search({
+                    container: "analysis-content"
+                });
+                
+                const cfRouteLayer = new GraphicsLayer();
+                map.add(cfRouteLayer, 0);
+
+                function setCFRouteSymbol(index){
+                    if (index == 0){
+                        return {
+                            type: "simple-line",
+                            color: [237, 81, 81, 0.75],
+                            width: "5",
+                        }
+                    } else if (index == 1) {
+                        return {
+                            type: "simple-line",
+                            color: [20, 158, 206, 0.75],
+                            width: "5",
+                        }
+                    } else if (index == 2) {
+                            return {
+                            type: "simple-line",
+                            color: [167, 198, 54, 0.75],
+                            width: "5",
+                        }
+                    } else {
+                        return {
+                            type: "simple-line",
+                            color: [60, 175, 153, 0.75],
+                            width: "5",
+                        }
+                    }
+                }
+
+                let startPoint;
+                
+                anSearch.on("search-complete", function(event){
+                    if (event.numResults > 0){
+                        document.querySelector(`[data-action-id=perform-analysis]`).disabled = false;
+                        startPoint = event.results[0].results[0].feature;
+                    }     
+                });
+
+                anSearch.on("search-clear", function(event){
+                    cfRouteLayer.removeAll();
+                    document.querySelector(`[data-action-id=perform-analysis]`).disabled = true;
+                });
+
+                const closestFacilityUrl = 'https://route-api.arcgis.com/arcgis/rest/services/World/ClosestFacility/NAServer/ClosestFacility_World/solveClosestFacility';
+
+                function findClosestFacility(){
+                    cfRouteLayer.removeAll();
+                    
+                    const queryParams = {
+                        spatialRelationship: "intersects",
+                        geometry: startPoint.geometry,
+                        distance: 2000,
+                        units: "meters",
+                        outSpatialReference: {wkid: 4326},
+                        returnGeometry: true,
+                        outFields:["OBJECTID"]
+                    };
+
+                    ipsLayer.queryFeatures(queryParams).then(function(results){
+                        let closestFacilityParams = new ClosestFacilityParameters({
+                            facilities: results,
+                            incidents: new FeatureSet({features: [startPoint]}),
+                            returnRoutes: true,
+                            returnFacilities: false,
+                            defaultTargetFacilityCount: 3
+                        });
+
+                        closestFacility.solve(closestFacilityUrl, closestFacilityParams).then(function(solveResults){
+                            solveResults.routes.features.forEach((route, i) => {
+                                route.symbol = setCFRouteSymbol(i);
+                                cfRouteLayer.add(route);
+                            });
+                            view.goTo({
+                                target: solveResults.routes.features
+                            });
+                        });
+                    }); 
+                }
+                document.querySelector(`[data-action-id=perform-analysis]`).addEventListener("click", findClosestFacility);
+            });
+        </script>
+    </head>
+    <body>
+        <calcite-shell content-behind>
+            <h3 id="header-title" slot="header">
+                Introducción al desarrollo de Alicaciones Web
+            </h3>
+            <calcite-shell-panel slot="panel-start" detached>
+                <calcite-action-bar slot="action-bar">
+                    <calcite-action data-action-id="analysis" icon="analysis" text="Análisis"></calcite-action>
+                </calcite-action-bar>
+
+                <calcite-panel heading="Análisis" data-panel-id="analysis" hidden>
+                    <calcite-block heading="Instalaciones cercanas" description="El cálculo de ruta de instalaciones cercanas le permite encontrar una o más instalaciones cercanas a partir de un incidente. Use el buscador para definir un punto de partida."></calcite-block>
+                    
+                    <div id="analysis-content" style="width: auto;"></div>
+                    
+                    <calcite-block heading="Calcular" description="Una vez haya definido el punto de partida, haga clic en Ejecutar para encontrar las IPC más cercanas y ver la ruta.">
+                        
+                    </calcite-block>
+                    
+                    <calcite-button data-action-id="perform-analysis" icon-start="find-path" slot="footer-actions" disabled="true">
+                        Ejecutar
+                    </calcite-button>
+                </calcite-panel>
+            </calcite-shell-panel>
+            <div id="viewDiv"></div>
+        </calcite-shell>
+    </body>
+</html>
