@@ -51,7 +51,7 @@ require([
     ClosestFacilityParameters,
     GraphicsLayer
 ) {
-    esriConfig.apiKey = "AAPK5f0aa6b2f0e14123ac60ccbbf3ad368aQYlqyHlk2Btg1Mez3cBZ4t7k6x9MaxduUGV82OZKpOUOUKYhaXoxV4CZv1_JlwLe";
+    //esriConfig.apiKey = "SU_API_KEY";
 
     const map = new Map({
         basemap: "arcgis-topographic"
