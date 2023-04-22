@@ -1,0 +1,22 @@
+html,
+body,
+#viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    display: flex;
+}
+
+#header-title {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+#header {
+    display: flex;
+    padding: 0 1rem;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <title>ArcGIS Maps SDK for JavaScript</title>
+
+        <script>
+            esriConfig = {
+                locale: "es"
+            };
+        </script>
+
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <script src="https://js.arcgis.com/calcite-components/1.2.0/calcite.esm.js" type="module"></script>
+        <link rel="stylesheet" href="https://js.arcgis.com/calcite-components/1.2.0/calcite.css" />
+
+        <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
+        <script src="https://js.arcgis.com/4.26/"></script>
+        
+        <script type="text/JavaScript" src="js/map.js"></script>
+    </head>
+    <body>
+        <calcite-shell content-behind>
+            <div slot="header" id="header">
+                <a href="https://github.com/DesarrolladoresEsri/epc.co.js/blob/main/README.md">
+                    <calcite-action icon="home" text="Ir al inicio" text-enabled="true" slot="header-actins-start"></calcite-action>
+                </a>
+                <h3 id="header-title">
+                    Introducción al desarrollo de Alicaciones Web
+                </h3>
+            </div>
+
+            <calcite-shell-panel slot="panel-start" detached>
+
+                <calcite-action-bar slot="action-bar">
+                    <calcite-action data-action-id="basemaps" icon="basemap" text="Mapas base"></calcite-action>
+                    <calcite-action data-action-id="legend" icon="legend" text="Leyenda"></calcite-action>
+                    <calcite-action data-action-id="analysis" icon="analysis" text="Análisis"></calcite-action>
+                </calcite-action-bar>
+
+                <calcite-panel heading="Mapas base" data-panel-id="basemaps" hidden>
+                    <div id="basemaps-container"></div>
+                </calcite-panel>
+
+                <calcite-panel heading="Leyenda" data-panel-id="legend" hidden>
+                    <div id="legend-container"></div>
+                </calcite-panel>
+
+                <calcite-panel heading="Análisis" data-panel-id="analysis" hidden>
+                    <calcite-block heading="Instalaciones cercanas" description="El cálculo de ruta de instalaciones cercanas le permite encontrar una o más instalaciones cercanas a partir de un incidente. Use el buscador para definir un punto de partida."></calcite-block>
+                    
+                    <div id="analysis-content" style="width: auto;"></div>
+                    
+                    <calcite-block heading="Calcular" description="Una vez haya definido el punto de partida, haga clic en Ejecutar para encontrar las IPC más cercanas y ver la ruta.">
+                        
+                    </calcite-block>
+                    
+                    <calcite-button data-action-id="perform-analysis" icon-start="find-path" slot="footer-actions" disabled="true">
+                        Ejecutar
+                    </calcite-button>
+                </calcite-panel>
+            </calcite-shell-panel>
+            <div id="viewDiv"></div>
+        </calcite-shell>
+    </body>
+</html>
